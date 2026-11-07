@@ -1,0 +1,521 @@
+@charset "UTF-8";
+
+:root {
+  --section-padding-block: 80px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-padding-block: 20px;
+  }
+}
+
+/*-------------------------------------------------------- セクション共通 */
+.section {
+    padding-block: var(--section-padding-block);
+}
+
+body {
+    line-height: 2.0;
+}
+
+h1,
+h2 {
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+h2 {
+    color: #BB0701;
+    font-size: 60px;
+
+    @media (max-width: 767px) {
+        font-size: 30px;
+    }
+}
+
+/*-------------------------------------------------------- NAV */
+nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+/*-------------------------------------------------------- HEADER */
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+    & div img {
+        width: 60%;
+    }
+
+    & nav ul {
+        display: flex;
+        gap: 30px;
+    }
+
+    & .menu-button {
+        display: none;
+        width: 40px;
+        padding: 8px;
+        border: 0;
+        background-color: transparent;
+
+        & span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            margin-block: 6px;
+            background-color: #000;
+        }
+    }
+
+    @media (max-width: 767px) {
+        & .menu-button {
+            display: block;
+        }
+
+        & .global-nav {
+            display: none;
+            position: absolute;
+            z-index: 10;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 24px 16px;
+            background-color: #fff;
+
+            & ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+            }
+        }
+
+        & .global-nav.is-open {
+            display: block;
+        }
+    }
+}
+
+/*-------------------------------------------------------- MV */
+.section--hero {
+    position: relative;
+    padding-block: 0;
+
+    &>img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: brightness(0.9) saturate(0.9) contrast(1.1);
+    }
+
+    & .hero-content {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        padding-inline: 20px;
+        color: #fff;
+        text-align: center;
+
+        & p {
+            margin-top: 16px;
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        &>img {
+            height: 320px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        & .hero-content {
+            & h1 {
+                font-size: 32px;
+            }
+
+            & p {
+                margin-top: 12px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+/*-------------------------------------------------------- ABOUT */
+.section--about {
+    width: 1200px;
+    margin: auto;
+
+    & .about-images {
+        display: flex;
+        padding-top: 40px;
+
+        & img {
+            width: 25%;
+
+            &:first-child {
+                border-radius: 12px 0 0 12px;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        &>p br {
+            display: none;
+        }
+
+        & .about-images {
+            flex-wrap: wrap;
+            padding-top: 20px;
+
+            & img {
+                width: 50%;
+                border-radius: 0;
+            }
+
+            & img:nth-child(1) {
+                border-radius: 12px 0 0 0;
+            }
+
+            & img:nth-child(2) {
+                border-radius: 0 12px 0 0;
+            }
+
+            & img:nth-child(3) {
+                border-radius: 0 0 0 12px;
+            }
+
+            & img:nth-child(4) {
+                border-radius: 0 0 12px 0;
+            }
+        }
+    }
+}
+
+/*-------------------------------------------------------- COURSE */
+/* 見出しと導入文の左右位置を揃える */
+.section--course {
+    & .section__title {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* 画像と文章の並びを画面幅いっぱいにする */
+    & .course-list {
+        width: 100vw;
+        margin-inline: calc(50% - 50vw);
+    }
+
+    /* 文章と画像を左右半分ずつに分ける */
+    & .course-item {
+        display: flex;
+        padding-top: 40px;
+
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        & .course-item__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+        }
+
+        & .course-item__image {
+            display: block;
+            width: calc(50% - 16px);
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        /* 1・3つ目：文章の右側、つまり写真との間を40pxにする */
+        &:nth-child(odd) .course-item__content {
+            padding-right: 80px;
+        }
+
+        /* 2つ目：文章の左側、つまり写真との間を40pxにする */
+        &:nth-child(even) .course-item__content {
+            padding-left: 80px;
+        }
+
+        /* 長文が横に広がりすぎないようにする */
+        & .course-item__content-inner {
+            max-width: 440px;
+        }
+
+        /* 1・3つ目の文章を、画像側へ寄せる */
+        &:nth-child(odd) .course-item__content-inner {
+            margin-left: auto;
+        }
+
+        /* 2つ目の文章を、画像側へ寄せる */
+        &:nth-child(even) .course-item__content-inner {
+            margin-right: auto;
+        }
+    }
+
+    @media (max-width: 767px) {
+        & .section__title {
+            width: auto;
+            margin: 0;
+            padding-inline: 16px;
+        }
+
+        & .course-list {
+            padding: 0 16px;
+        }
+
+        & .course-item,
+        & .course-item:nth-child(even) {
+            flex-direction: column;
+        }
+
+        & .course-item {
+            & .course-item__image {
+                order: -1;
+                width: 100%;
+            }
+
+            & .course-item__content {
+                width: 100%;
+                padding: 32px 20px;
+            }
+
+            & .course-item__content-inner {
+                max-width: none;
+                margin: 0;
+            }
+
+            &:nth-child(odd) .course-item__content,
+            &:nth-child(even) .course-item__content {
+                padding: 32px 20px;
+            }
+        }
+    }
+}
+
+/*-------------------------------------------------------- NEWS */
+.section--news {
+    width: 1200px;
+    margin: auto;
+
+    & article {
+
+        & img,
+        & p {
+            width: 100%;
+            border-radius: 12px;
+        }
+    }
+
+    & .news-list {
+        display: flex;
+        gap: 32px;
+        line-height: 1.7;
+
+        & article {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    @media (max-width: 767px) {
+        & .news-list {
+            flex-direction: column;
+        }
+
+        & .news-list article {
+            flex: none;
+        }
+    }
+}
+
+/*-------------------------------------------------------- ACCSESS */
+.section--access {
+    width: 1200px;
+    margin: auto;
+    line-height: 1.7;
+
+    & .access-text {
+        flex: 1;
+    }
+
+    & .address-map {
+        display: flex;
+        align-items: flex-start;
+        gap: 80px;
+
+        & dt {
+            margin-top: 8px;
+        }
+
+        & dt:first-child {
+            margin-top: 0;
+        }
+
+        & iframe {
+            flex: 2;
+            min-width: 0;
+        }
+    }
+
+    @media (max-width: 767px) {
+        & .address-map {
+            flex-direction: column;
+            gap: 32px;
+
+            & .access-text,
+            & iframe {
+                width: 100%;
+            }
+
+            & iframe {
+                flex: none;
+                height: 300px;
+            }
+        }
+    }
+}
+
+/*-------------------------------------------------------- CONTACT */
+.section--contact {
+    width: 1200px;
+    margin: auto;
+
+    & .contact-text {
+        flex: 1;
+    }
+
+    & .contact-content {
+        & form {
+            flex: 0 0 auto;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background-color: #f0f0f0;
+            border-radius: 18px;
+
+            &>label,
+            &>input,
+            &>select,
+            &>textarea {
+                display: block;
+            }
+
+            &>input {
+                width: 400px;
+                height: 36px;
+            }
+
+            & select {
+                width: 400px;
+                height: 36px;
+            }
+
+            & .name,
+            & .kana,
+            & .email,
+            & .how-did-you-know {
+                width: 400px;
+                margin-top: 20px;
+            }
+
+            & .douki {
+                padding-top: 18px;
+            }
+
+            & .checkbox-label {
+                display: block;
+
+                & input {
+                    width: auto;
+                    height: auto;
+                }
+            }
+
+            & .detailtitle {
+                margin-top: 20px;
+            }
+
+            & .detailtext {
+                width: 400px;
+                height: 200px;
+            }
+
+            & .submit {
+                display: block;
+                width: 200px;
+                height: 40px;
+                margin: 20px auto;
+                border: none;
+                border-radius: 8px;
+                color: #fff;
+                text-align: center;
+                background-color: #bb0701;
+            }
+
+            @media (max-width: 767px) {
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+
+                &>input,
+                &>select,
+                & .detailtext {
+                    width: 100%;
+                }
+
+                & .name,
+                & .kana,
+                & .email,
+                & .how-did-you-know {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+/*-------------------------------------------------------- SPセクション共通 */
+@media (max-width: 767px) {
+
+    .section--about,
+    .section--news,
+    .section--access,
+    .section--contact {
+        width: auto;
+        margin: 0;
+        padding-inline: 16px;
+    }
+}
+
+/*-------------------------------------------------------- FOOTER */
+footer {
+    padding: 10px 0;
+    color: #fff;
+    text-align: center;
+    background-color: black;
+
+    & .sp-only {
+        display: none;
+    }
+
+    @media (max-width: 767px) {
+        & .sp-only {
+            display: block;
+        }
+    }
+}
