@@ -160,12 +160,18 @@ header {
     & .about-images {
         display: flex;
         padding-top: 40px;
+        overflow: hidden;
+        border-radius: 12px;
 
         & img {
             width: 25%;
 
             &:first-child {
                 border-radius: 12px 0 0 12px;
+            }
+
+            &:last-child {
+                border-radius: 0 12px 12px 0;
             }
         }
     }
